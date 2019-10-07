@@ -1,5 +1,4 @@
-import sys
-sys.path.append('.')
+from models.user.user import User
 
 logged_in_user = None
 
@@ -29,48 +28,60 @@ def print_welcome_text():
   print('\t' * 5)
   print('-' * 100)
 
-def cli(logged_in_user):
+def cli():
   '''
   acts as the main part of the program
   '''
-  while (logged_in_user != None):
+
+  global logged_in_user
+
+  while logged_in_user == None:
     authentication()
   else:
     print('you are in!')
     input()
-    logged_in_user = None
 
 def authentication():
   '''
   login or signup user
   '''
   
-  # while True:
-  #   print('Type in \'l\' to login')
-  #   print('Type in \'s\' to signup')
-  #   authenticate_decision = input().lower()
+  global logged_in_user
+  
+  while True:
+    print('Type in \'l\' to login')
+    print('Type in \'s\' to signup')
+    authenticate_decision = input().lower()
 
-  #   if authenticate_decision == 'l':
-  #     print('Enter your username and password')
-  #     username = input('username:')
-  #     password = input('password:')
-  #     print('bravo')
-  #     break
-  #   elif authenticate_decision == 's':
-  #     print('Enter your username and password')
-  #     username = input('username:')
-  #     password = input('password:')
-  #     confirm_password = input('confirm password:')
-  #     print('you in')
-  #     break
-  #   else:
-  #     print('Not clear, please try again and enter the given options.')
+    if authenticate_decision == 'l':
+      print('Enter your username and password')
+      _username = input('username: ')
+      print(type(_username) == 'str')
+      _password = input('password: ')
 
-  #   break
+      
+      logged_in_user == User(username=_username, password=_password)
+      print('bravo')
+      break
+    elif authenticate_decision == 's':
+      while True:
+        print('Enter your username and password')
+        _username = input('username: ')
+        _password = input('password: ')
+        confirm_password = input('confirm password: ')
+
+        if confirm_password == _password:
+          logged_in_user = User(username=_username, password=_password)
+          print('you are in! :D')
+          break
+        else:
+          print('passwords don\'t much, try again')
+    else:
+      print('Not clear, please try again and enter the given options.')
 
 def main():
   print_welcome_text()
-  cli(logged_in_user)
+  cli()
     
 if __name__ == '__main__':
   main()

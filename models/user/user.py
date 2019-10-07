@@ -5,7 +5,7 @@ class User():
   blueprint for user data
   '''
 
-  def __init__(self, username, password):
+  def __init__(self, *, username=None, password=None):
     '''
     constructor for instantiating an empty object
 
@@ -14,8 +14,14 @@ class User():
       password: users' passord
     '''
 
-    self.username = username
-    self.password = (self.generatePassword(), password)[password.trim() == '' or password.trim == None]
+    if username.strip() == '' or username == None:
+      self.username = username
+      self.password = password
+    else:
+      self.username = username
+      self.password = (self.generatePassword(), password)[password.strip() == '' or password.strip == None]
+
+    
 
   def generatePassword(self):
     '''
@@ -24,4 +30,3 @@ class User():
 
     import random, string
     return ''.join(random.choice(string.ascii_lowercase) for i in range(10))
-    
