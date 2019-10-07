@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "username": "wayne",
+      "password": "wayne",
+      "credentials": [
+        {
+          "credentialCategory": "",
+          "credentialUsername": "",
+          "credentialPassword": ""
+        }
+      ]
+    }
+  ],
+  "credentialCategory": [
+    "FaceBook",
+    "Instagram",
+    "Twitter",
+    "Snapchat",
+    "9gag",
+    "Reddit",
+    "LinkedIn"
+  ]
+}
