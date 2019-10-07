@@ -14,12 +14,15 @@ class User():
       password: users' passord
     '''
 
-    if username.strip() == '' or username == None:
-      self.username = username
-      self.password = password
-    else:
-      self.username = username
-      self.password = (self.generatePassword(), password)[password.strip() == '' or password.strip == None]
+    self.username = username
+    self.password = password
+
+    # if username.strip() == '' or username == None:
+    #   self.username = username
+    #   self.password = password
+    # else:
+    #   self.username = username
+    #   self.password = (password, self.generatePassword())[password.strip() == '' or password.strip == None]
 
     
 
