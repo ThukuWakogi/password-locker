@@ -1,6 +1,7 @@
 from models.user.user import User
 
 logged_in_user = None
+quit_from_authenticate = False
 
 def check_datafile_exists():
   '''
@@ -28,60 +29,51 @@ def print_welcome_text():
   print('\t' * 5)
   print('-' * 100)
 
-def cli():
-  '''
-  acts as the main part of the program
-  '''
-
-  global logged_in_user
-
-  while logged_in_user == None:
-    authentication()
-  else:
-    print('you are in!')
-    input()
-
-def authentication():
-  '''
-  login or signup user
-  '''
-  
-  global logged_in_user
-  
+def manage_credentials():
   while True:
-    print('Type in \'l\' to login')
-    print('Type in \'s\' to signup')
-    authenticate_decision = input().lower()
-
-    if authenticate_decision == 'l':
-      print('Enter your username and password')
-      _username = input('username: ')
-      print(type(_username) == 'str')
-      _password = input('password: ')
-
-      
-      logged_in_user == User(username=_username, password=_password)
-      print('bravo')
-      break
-    elif authenticate_decision == 's':
-      while True:
-        print('Enter your username and password')
-        _username = input('username: ')
-        _password = input('password: ')
-        confirm_password = input('confirm password: ')
-
-        if confirm_password == _password:
-          logged_in_user = User(username=_username, password=_password)
-          print('you are in! :D')
-          break
-        else:
-          print('passwords don\'t much, try again')
-    else:
-      print('Not clear, please try again and enter the given options.')
+    print('credentials are coming soon')
+    input()
+    break
 
 def main():
+  global logged_in_user
+  global quit_from_authenticate
   print_welcome_text()
-  cli()
+
+  while True:
+    print('would you like to log in or sign up')
+    print('to log in, enter (l)')
+    print('to sign up, enter (s)')
+    print('to exit, enter (e)')
+    login_or_signup = input()
+
+    if login_or_signup.strip().lower() == 'l':
+      print('Welcome back! =D')
+      print('Type in your username and email')
+      _username = input('username: ').strip()
+      _password = input('password: ').strip()
+
+      if _username == 'user' or _password == 'user':
+        print('you are in! =D')
+        manage_credentials()
+      else:
+        print('oops! either the password or username is invalid. please try again')
+        continue
+    elif login_or_signup.strip().lower() == 's':
+      print('We are excited to have you join us! :) we will need your username and email')
+      print('Type in your username and email')
+      _username = input().strip()
+      _password = input().strip()
+      if _username == 'user' or _password == 'user':
+        print('we couldn\'t get some or all of the information. Try type in all the requirements')
+        continue
+      else:
+        print('oops! either the password or username is invalid. please try again')
+        continue
+    elif login_or_signup.strip().lower() == 'e':
+      print('bye, have a great time...')
+      break
+
     
 if __name__ == '__main__':
   main()
