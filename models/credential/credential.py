@@ -1,25 +1,12 @@
-import sys
-sys.path.append('../credential')
-
-from ..credential.credential import Credential
-
-class User():
+class Credential:
   '''
-  blueprint for user data
+  blueprint for how credentials should be stored
   '''
 
-  def __init__(self, *, username=None, password=None, credentials=[]):
-    '''
-    constructor for instantiating an empty object
-
-    Args:
-      username: users' username, must be unique
-      password: users' passord
-    '''
-
-    self.username = username
-    self.password = password
-    self.credentials = credentials
+  def __init__(self, *, category=None, username=None, password=None):
+    self.credentialCategory = category
+    self.credentialUsername = username
+    self.credentialPassword = (password, self.generatePassword())[password.strip() == '' or password.strip == None]
 
     # if username.strip() == '' or username == None:
     #   self.username = username
@@ -27,8 +14,6 @@ class User():
     # else:
     #   self.username = username
     #   self.password = (password, self.generatePassword())[password.strip() == '' or password.strip == None]
-
-    
 
   def generatePassword(self):
     '''
