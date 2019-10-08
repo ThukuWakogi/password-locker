@@ -48,7 +48,8 @@ def manage_credentials():
     if credential_action == 'v':
       if len(logged_in_user.credentials) > 0:
         for credential in logged_in_user.credentials:
-          print(f'{credential.credentialCategory} {credential.credentialUsername} {credential.credentialPassword}')
+          print(credential)
+          print(f'{credential["credentialCategory"]} {credential["credentialUsername"]} {credential["credentialPassword"]}')
           print('that\'s all :)')
       else:
         print('lol, you don\'t have any credentials.')

@@ -1,1 +1,32 @@
-{"users": [{"username": "wayne", "password": "wayne", "credentials": []}, {"username": "tim", "password": "tim", "credentials": []}, {"username": "peter", "password": "peter", "credentials": []}], "credentialCategory": ["FaceBook", "Instagram", "Twitter", "Snapchat", "9gag", "Reddit", "LinkedIn"]}
+{
+  "users": [
+    {
+      "username": "wayne",
+      "password": "wayne",
+      "credentials": []
+    },
+    {
+      "username": "tim",
+      "password": "tim",
+      "credentials": [{
+        "credentialCategory": "Facebook",
+        "credentialUsername": "timmy",
+        "credentialPassword": "mididnd9"
+      }]
+    },
+    {
+      "username": "peter",
+      "password": "peter",
+      "credentials": []
+    }
+  ],
+  "credentialCategory": [
+    "FaceBook",
+    "Instagram",
+    "Twitter",
+    "Snapchat",
+    "9gag",
+    "Reddit",
+    "LinkedIn"
+  ]
+}
