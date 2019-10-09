@@ -34,6 +34,9 @@ def print_welcome_text():
   print('-' * 100)
 
 def manage_credentials():
+  '''
+  provides user an interface to manage credentials
+  '''
   global logged_in_user
   print('What would you like to do with your credentials? =D')
 
@@ -48,18 +51,55 @@ def manage_credentials():
     if credential_action == 'v':
       if len(logged_in_user.credentials) > 0:
         for credential in logged_in_user.credentials:
-          print(credential)
-          print(f'{credential["credentialCategory"]} {credential["credentialUsername"]} {credential["credentialPassword"]}')
+          print(f'Social platform: {credential["credentialCategory"]}')
+          print(f'username: {credential["credentialUsername"]}')
+          print(f'password: {credential["credentialPassword"]}')
+          print('-' * 20)
           print('that\'s all :)')
       else:
         print('lol, you don\'t have any credentials.')
     elif credential_action == 'a':
-      print('this are the social platforms available')
+      while True:
+        print('Cool, i\'ll need the particular social platform and credentials')
+        credSocial = input('social platform: ').strip()
+        credUsername = input('username: ').strip()
+        credPassword = input('password (leaving it empty will have a password generated for you): ').strip()
 
-      for index, social_platform in data['credentialCategory']:
-        print(f'{index}: {social_platform}')
-      
-      category_choice = input().strip().lower()
+        if credSocial == '' or credUsername == '':
+          print('We can\'t work with the information you\'ve given. Please provide valid information')
+          continue
+        elif len(logged_in_user.credentials) == 0:
+          logged_in_user.credentials.append(Credential(category=credSocial, username=credUsername, password=credPassword))
+          data['users']['credentials'].append({
+            "credentialCategory": logged_in_user.credentials[-1].credentialCategory,
+            "credentialUsername": logged_in_user.credentials[-1].credentialUsername,
+            "credentialPassword": logged_in_user.credentials[-1].credentialPassword
+          })
+
+          with open('data.json', 'w') as outfile:
+            json.dump(data, outfile)
+        elif len(logged_in_user.credentials) > 0:
+          for credential in logged_in_user.credentials:
+            if credential == credSocial:
+              print('Social platform already exists, you can edit or delete it')
+              break
+            
+            print(data['users'])
+            print(data['users'][-1])
+            logged_in_user.credentials.append(Credential(category=credSocial, username=credUsername, password=credPassword))
+            print(logged_in_user.__dict__)
+            data['users']['credentials'].append({
+              "credentialCategory": logged_in_user.credentials[-1].credentialCategory,
+              "credentialUsername": logged_in_user.credentials[-1].credentialUsername,
+              "credentialPassword": logged_in_user.credentials[-1].credentialPassword
+            })
+
+            with open('data.json', 'w') as outfile:
+              json.dump(data, outfile)
+
+          print('credential added successfully =)')
+          break
+
     elif credential_action == 'e':
       print('you will edit credentials. soon enough :)')
     elif credential_action == 'd':
@@ -74,6 +114,9 @@ def manage_credentials():
       print('You input doesn\'t look right. please try again :)')
 
 def main():
+  '''
+  Calls all functions needed for program to work
+  '''
   global logged_in_user
   global quit_from_authenticate
   global data
